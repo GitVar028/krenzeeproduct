@@ -1,6 +1,5 @@
 # Use AWS's official Corretto 25 Alpine image for a minimal footprint
-FROM amazoncorretto:21-alpine-jdk
-
+FROM public.ecr.aws/amazoncorretto/amazoncorretto:21
 # Define arguments for flexibility
 ARG JAR_FILE=target/*.jar
 ARG PORT=8080
