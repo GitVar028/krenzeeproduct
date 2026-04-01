@@ -3,16 +3,15 @@ FROM public.ecr.aws/amazoncorretto/amazoncorretto:21
 ARG JAR_FILE=target/*.jar
 ARG PORT=8080
 
-# Create non-root user (Amazon Linux compatible)
-RUN groupadd spring && useradd -g spring spring
-
 WORKDIR /app
 
 COPY ${JAR_FILE} app.jar
 
-RUN chown -R spring:spring /app
+# Optional but safer
+RUN chown -R 1001 /app
 
-USER spring:spring
+# Run as non-root user (no need to create one)
+USER 1001
 
 EXPOSE ${PORT}
 
