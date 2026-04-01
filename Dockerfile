@@ -1,5 +1,5 @@
 # Use AWS's official Corretto 25 Alpine image for a minimal footprint
-FROM amazoncorretto:25-alpine-jdk
+FROM amazoncorretto:21-alpine-jdk
 
 # Define arguments for flexibility
 ARG JAR_FILE=target/*.jar
