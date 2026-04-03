@@ -1,7 +1,9 @@
 package com.krayzee.krenzeeproduct.adapter.controller;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import com.krayzee.krenzeeproduct.adapter.gateway.ProductCategoryGateway;
+import com.krayzee.krenzeeproduct.adapter.mapper.ProductCategoryDTO;
+import com.krayzee.krenzeeproduct.adapter.response.GenericResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,26 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController 
+@RestController
 @RequestMapping("/api")
-public class ProductController { 
-
-    @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts() {
+@RequiredArgsConstructor
+public class ProductController {
+    
+    private final ProductCategoryGateway productCategoryGateway;
+    
+    @GetMapping("/product-categories")
+    public ResponseEntity<GenericResponse> getProducts() {
+        List<ProductCategoryDTO> productCategories = productCategoryGateway.getAllActiveProductCategory();
         return ResponseEntity.ok(
-                List.of(
-                    new Product("54321", "Wedding Invitation"), 
-                    new Product("12345", "Key Chains") 
-                )
+            new GenericResponse("200", "Success", productCategories)
         );
     }
     
-    @AllArgsConstructor 
-    @Getter
-    public static final class Product {
-        private String productCode; 
-        private String productName;
-    }
-    
-
 }

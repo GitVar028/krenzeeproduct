@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: krenzeeproduct
+aws:
+  dynamodb:
+    endpoint: "http://localhost:8000"
+  
