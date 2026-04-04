@@ -1,7 +1,6 @@
-package com.krayzee.krenzeeproduct.adapter.dynamodb;
+package com.krayzee.krenzeeproduct.adapter.dynamodb.repository;
 
-import com.krayzee.krenzeeproduct.adapter.mapper.ProductCategoryDTO;
-import com.krayzee.krenzeeproduct.adapter.mapper.ProductCategoryMapper;
+import com.krayzee.krenzeeproduct.adapter.dynamodb.table.ProductSubCategory;
 import org.springframework.stereotype.Repository;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
@@ -14,27 +13,22 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class ProductCategoryRepository { 
+public class ProductSubCategoryRepository { 
+
+    private final DynamoDbTable<ProductSubCategory> productSubCategoryDynamoDbTable;
     
-    private final DynamoDbTable<ProductCategory> productCategoryDynamoDbTable;
-    
-    private final ProductCategoryMapper productCategoryMapper;
-    
-    public ProductCategoryRepository(DynamoDbEnhancedClient dynamoDbEnhancedClient, ProductCategoryMapper productCategoryMapper) {
-        this.productCategoryDynamoDbTable = dynamoDbEnhancedClient.table("ProductCategory",
-                TableSchema.fromBean(ProductCategory.class));
-        this.productCategoryMapper = productCategoryMapper;
+    public ProductSubCategoryRepository(DynamoDbEnhancedClient dynamoDbEnhancedClient) {
+        this.productSubCategoryDynamoDbTable = dynamoDbEnhancedClient.table("ProductSubCategory",
+                TableSchema.fromBean(ProductSubCategory.class));
     }
     
-
-   public List<ProductCategoryDTO> getAllActiveProductCategory() {
-   
+    public List<ProductSubCategory> getActiveSubCategories() {
         Map<String, AttributeValue> expressionValues = Map.of(
             ":statusVal", AttributeValue.builder().s("ACTIVE").build()
             );
         
             Expression filterExpression = Expression.builder()
-                    .expression("category_status = :statusVal")
+                    .expression("sub_category_status = :statusVal")
                     .expressionValues(expressionValues)
                     .build();
         
@@ -42,11 +36,10 @@ public class ProductCategoryRepository {
                     .filterExpression(filterExpression)
                     .build();
    
-        List<ProductCategory> productCategories = productCategoryDynamoDbTable.scan(scanRequest)
+        return productSubCategoryDynamoDbTable.scan(scanRequest)
                 .items()
                 .stream()
                 .toList();
-        return productCategoryMapper.toDTOList(productCategories);
-   }
+    }
 
 }

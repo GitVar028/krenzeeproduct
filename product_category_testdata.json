@@ -1,0 +1,86 @@
+{
+
+  "ProductCategory": [
+
+    {
+
+      "PutRequest": {
+
+        "Item": {
+
+          "category_code": { "S": "SVS01" },
+
+          "category_name": { "S": "Souvenirs" },
+
+          "category_image": { "S": "keychain_thumb.jpg" },
+
+          "category_status": { "S": "ACTIVE" }
+
+        }
+
+      }
+
+    },
+
+    {
+
+      "PutRequest": {
+
+        "Item": {
+
+          "category_code": { "S": "IVT01" },
+
+          "category_name": { "S": "Invitations" },
+
+          "category_image": { "S": "basket_thumb.jpg" },
+
+          "category_status": { "S": "ACTIVE" }
+
+        }
+
+      }
+
+    },
+
+    {
+
+      "PutRequest": {
+
+        "Item": {
+
+          "category_code": { "S": "GFT01" },
+
+          "category_name": { "S": "Gifts" },
+
+          "category_image": { "S": "giftbox_thumb.jpg" },
+
+          "category_status": { "S": "ACTIVE" }
+
+        }
+
+      }
+
+    }, 
+    {
+
+      "PutRequest": {
+
+        "Item": {
+
+          "category_code": { "S": "CRT" },
+
+          "category_name": { "S": "Creatives" },
+
+          "category_image": { "S": "giftbox_thumb.jpg" },
+
+          "category_status": { "S": "ACTIVE" }
+
+        }
+
+      }
+
+    }
+
+  ]
+
+}

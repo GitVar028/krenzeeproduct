@@ -1,4 +1,4 @@
-package com.krayzee.krenzeeproduct.adapter.mapper;
+package com.krayzee.krenzeeproduct.adapter.mapper.dto;
 
 public record ProductCategoryDTO(
     String categoryCode,

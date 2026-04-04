@@ -1,4 +1,4 @@
-package com.krayzee.krenzeeproduct.adapter.dynamodb;
+package com.krayzee.krenzeeproduct.adapter.dynamodb.table;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
