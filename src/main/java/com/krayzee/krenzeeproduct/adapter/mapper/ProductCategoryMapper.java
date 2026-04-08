@@ -11,21 +11,13 @@ import java.util.List;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ProductCategoryMapper {
 
-    @Mapping(target = "categoryCode", source = "productCategoryCode")
-    @Mapping(target = "categoryName", source = "productCategoryName")
-    @Mapping(target = "imageUrl", source = "productCategoryImage")
-    @Mapping(target = "status", source = "status")
+    @Mapping(target = "categoryCode", source = "categoryCode")
+    @Mapping(target = "categoryName", source = "categoryName")
+    @Mapping(target = "categoryImageUrl", source = "categoryImageUrl")
+    @Mapping(target = "categoryStatus", source = "categoryStatus")
     ProductCategoryDTO toDTO(ProductCategory entity);
     
     List<ProductCategoryDTO> toDTOList(List<ProductCategory> entities);
 
-    // Note: When mapping BACK to an entity from a Record, MapStruct will use 
-    // the Record's accessor methods (e.g., dto.code() instead of dto.getCode())
-    @Mapping(target = "productCategoryCode", source = "categoryCode")
-    @Mapping(target = "productCategoryName", source = "categoryName")
-    @Mapping(target = "productCategoryImage", source = "imageUrl")
-    @Mapping(target = "status", source = "status")
-    ProductCategory toEntity(ProductCategoryDTO dto);
-    
     List<ProductCategory> toEntityList(List<ProductCategoryDTO> dtos);
 }

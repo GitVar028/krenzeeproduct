@@ -8,44 +8,41 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSortKey;
 
-import java.util.Set;
-
 @DynamoDbBean
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 public class Product {
     
-    private Integer productId;
-    
     private String productCode;
+    
+    private String sku;
     
     private String productName;
     
     private String productImageUrl;
     
-    private Set<String> productImageUrls;
+    private String purchaseModel;
     
-    private String price;
+    private String productStatus;
     
-    private String categoryCode;
+    private ProductPriceModel productPriceModel;
     
-    private String subCategoryCode;
+    private ProductTheme productTheme;
     
-    private String baseProductCode;
+    private ProductType productType;
     
-    private String description;
     
     @DynamoDbPartitionKey
-    @DynamoDbAttribute("product_id")
-    public Integer getProductId() {
-        return productId;
-    }
-    
-    @DynamoDbSortKey
     @DynamoDbAttribute("product_code")
     public String getProductCode() {
         return productCode;
+    }
+    
+    @DynamoDbSortKey
+    @DynamoDbAttribute("sku")
+    public String getSku() {
+        return sku;
     }
     
     @DynamoDbAttribute("product_name")
@@ -58,33 +55,28 @@ public class Product {
         return productImageUrl;
     }
     
-    @DynamoDbAttribute("product_image_urls")
-    public Set<String> getProductImageUrls() {
-        return productImageUrls;
+    @DynamoDbAttribute("purchase_model")
+    public String getPurchaseModel() {
+        return purchaseModel;
     }
     
-    @DynamoDbAttribute("price")
-    public String getPrice() {
-        return price;
+    @DynamoDbAttribute("product_status")
+    public String getProductStatus() {
+        return productStatus;
     }
     
-    @DynamoDbAttribute("category_code")
-    public String getCategoryCode() {
-        return categoryCode;
+    @DynamoDbAttribute("product_price_model")
+    public ProductPriceModel getProductPriceModel() {
+        return productPriceModel;
     }
     
-    @DynamoDbAttribute("sub_category_code")
-    public String getSubCategoryCode() {
-        return subCategoryCode;
+    @DynamoDbAttribute("product_theme")
+    public ProductTheme getProductTheme() {
+        return productTheme;
     }
     
-    @DynamoDbAttribute("base_product_code")
-    public String getBaseProductCode() {
-        return baseProductCode;
-    }
-    
-    @DynamoDbAttribute("description")
-    public String getDescription() {
-        return description;
+    @DynamoDbAttribute("product_type")
+    public ProductType getProductType() {
+        return productType;
     }
 }

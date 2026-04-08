@@ -1,10 +1,8 @@
 package com.krayzee.krenzeeproduct.adapter.controller;
 
 import com.krayzee.krenzeeproduct.adapter.gateway.ProductCategoryGateway;
-import com.krayzee.krenzeeproduct.adapter.gateway.ProductSubCategoryGateway;
+import com.krayzee.krenzeeproduct.adapter.gateway.response.GenericResponse;
 import com.krayzee.krenzeeproduct.adapter.mapper.dto.ProductCategoryDTO;
-import com.krayzee.krenzeeproduct.adapter.mapper.dto.ProductSubCategoryDTO;
-import com.krayzee.krenzeeproduct.adapter.response.GenericResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,22 +18,11 @@ public class ProductCategoryController {
     
     private final ProductCategoryGateway productCategoryGateway; 
     
-    private final ProductSubCategoryGateway productSubCategoryGateway;
-    
     @GetMapping("/product-categories")
-    public ResponseEntity<GenericResponse> getProductCategories() {
-        List<ProductCategoryDTO> productCategories = productCategoryGateway.getAllActiveProductCategory();
-        return ResponseEntity.ok(
-            new GenericResponse("200", "Success", productCategories)
-        );
+    public ResponseEntity<GenericResponse<List<ProductCategoryDTO>>> getProductCategories() {
+        return ResponseEntity.ok(productCategoryGateway.getAllActiveProductCategory());
     }
     
-    @GetMapping("/product-sub-categories")
-    public ResponseEntity<GenericResponse> getProductSubCategories() {
-        List<ProductSubCategoryDTO> activeSubCategories = productSubCategoryGateway.getActiveSubCategories();
-        return ResponseEntity.ok(
-            new GenericResponse("200", "Success", activeSubCategories)
-        );
-    }
+    
     
 }

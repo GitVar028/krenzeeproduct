@@ -2,53 +2,68 @@ package com.krayzee.krenzeeproduct.adapter.mapper;
 
 import com.krayzee.krenzeeproduct.adapter.dynamodb.table.Product;
 import com.krayzee.krenzeeproduct.adapter.mapper.dto.ProductDTO;
+import com.krayzee.krenzeeproduct.adapter.mapper.dto.ProductResponseContent;
+import com.krayzee.krenzeeproduct.adapter.gateway.response.GenericResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.Named;
+import software.amazon.awssdk.enhanced.dynamodb.model.Page;
+import software.amazon.awssdk.enhanced.dynamodb.model.PageIterable;
+
+import java.util.ArrayList;
 import java.util.List;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
+        uses = {
+                ProductPriceModelMapper.class,
+                ProductTypeMapper.class
+        })
 public interface ProductMapper {
-
-    /**
-     * Complete mapping from Entity to Record DTO.
-     * Note: MapStruct uses the Record's canonical constructor here.
-     */
-    @Mapping(source = "productId", target = "productId")
-    @Mapping(source = "productCode", target = "productCode")
-    @Mapping(source = "productName", target = "productName")
-    @Mapping(source = "productImageUrl", target = "imageUrl")
-    @Mapping(source = "productImageUrls", target = "imagePaths")
-    @Mapping(source = "price", target = "price")
-    @Mapping(source = "categoryCode", target = "categoryCode")
-    @Mapping(source = "subCategoryCode", target = "subCategoryCode")
-    @Mapping(source = "baseProductCode", target = "baseProductCode")
-    @Mapping(source = "description", target = "description")
+    
+    
+    @Mapping(target = "productCode", source = "productCode")
+    @Mapping(target = "sku", source = "sku")
+    @Mapping(target = "productName", source = "productName")
+    @Mapping(target = "productImageUrl", source = "productImageUrl")
+    @Mapping(target = "purchaseModel", source = "purchaseModel")
+    @Mapping(target = "productStatus", source = "productStatus")
+    @Mapping(target = "productPriceModel", source = "productPriceModel")
     ProductDTO toDTO(Product entity);
-
+    
+    @Mapping(target = "code", constant = "200")
+    @Mapping(target = "message", constant = "Success")
+    @Mapping(source = "productPageIterable", target = "response", qualifiedByName = "convertToProductResponseContent")
+    GenericResponse<ProductResponseContent> toGenericResponse(PageIterable<Product> productPageIterable);
+    
+    
+    @Named("convertToProductResponseContent")
+    default ProductResponseContent convertToProductResponseContent(PageIterable<Product> productPageIterable) {
+        if ( productPageIterable == null ) {
+            return null;
+        }
+        Page<Product> page = productPageIterable.iterator().next();
+        
+        List<ProductDTO> list = new ArrayList<>(page.items().size() );
+        for ( Product product : page.items() ) {
+            list.add( toDTO( product ) );
+        }
+        long totalNumberOfItems = productPageIterable.items().stream().count();
+        
+        ProductResponseContent productResponseContent = new ProductResponseContent();
+        productResponseContent.setProducts(list);
+        productResponseContent.setNumberOfItems((int) totalNumberOfItems);
+        String nextSku = null;
+        if (page.lastEvaluatedKey() != null && !page.lastEvaluatedKey().isEmpty()) {
+            nextSku = page.lastEvaluatedKey().get("sku").s();
+        }
+        productResponseContent.setNextSkuToken(nextSku);
+        return productResponseContent;
+    }
+    
     /**
      * Automatically maps a List of Entities to a List of Record DTOs.
      */
     List<ProductDTO> toDTOList(List<Product> entities);
-
-    /**
-     * Complete reverse mapping from Record DTO back to Entity.
-     * Note: MapStruct calls the Record's accessor methods (e.g., dto.code()).
-     */
-    @Mapping(source = "productId", target = "productId")
-    @Mapping(source = "productCode", target = "productCode")
-    @Mapping(source = "productName", target = "productName")
-    @Mapping(source = "imageUrl", target = "productImageUrl")
-    @Mapping(source = "imagePaths", target = "productImageUrls")
-    @Mapping(source = "price", target = "price")
-    @Mapping(source = "categoryCode", target = "categoryCode")
-    @Mapping(source = "subCategoryCode", target = "subCategoryCode")
-    @Mapping(source = "baseProductCode", target = "baseProductCode")
-    @Mapping(source = "description", target = "description")
-    Product toEntity(ProductDTO dto);
-
-    /**
-     * Maps a List of Record DTOs back to a List of Entities.
-     */
-    List<Product> toEntityList(List<ProductDTO> dtos);
+    
 }

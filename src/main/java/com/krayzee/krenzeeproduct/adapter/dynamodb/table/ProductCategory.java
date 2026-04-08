@@ -13,32 +13,32 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbParti
 @Setter
 public class ProductCategory {
     
-    private String productCategoryCode;
+    private String categoryCode;
     
-    private String productCategoryName;
+    private String categoryName;
     
-    private String productCategoryImage;
+    private String categoryImageUrl;
     
-    private String status;
+    private String categoryStatus;
     
     @DynamoDbPartitionKey
     @DynamoDbAttribute("category_code")
-    public String getProductCategoryCode() {
-        return productCategoryCode;
+    public String getCategoryCode() {
+        return categoryCode;
     }
     
     @DynamoDbAttribute("category_name")
-    public String getProductCategoryName() {
-        return productCategoryName;
+    public String getCategoryName() {
+        return categoryName;
     }
     
-    @DynamoDbAttribute("category_image")
-    public String getProductCategoryImage() {
-        return productCategoryImage;
+    @DynamoDbAttribute("category_image_url")
+    public String getCategoryImageUrl() {
+        return categoryImageUrl;
     }
     
     @DynamoDbAttribute("category_status")
-    public String getStatus() {
-        return status;
+    public String getCategoryStatus() {
+        return categoryStatus;
     }
 }

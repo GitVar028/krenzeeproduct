@@ -1,0 +1,12 @@
+{
+    "TableName": "Product",
+    "AttributeDefinitions": [
+        { "AttributeName": "product_code", "AttributeType": "S" },
+        { "AttributeName": "sub_category_code", "AttributeType": "S" }
+    ],
+    "KeySchema": [
+        { "AttributeName": "sub_category_code", "KeyType": "HASH" },
+        { "AttributeName": "product_code", "KeyType": "RANGE" }
+    ],
+    "BillingMode": "PAY_PER_REQUEST"
+}

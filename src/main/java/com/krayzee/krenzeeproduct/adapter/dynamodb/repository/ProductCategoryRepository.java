@@ -20,7 +20,7 @@ public class ProductCategoryRepository {
     private final DynamoDbTable<ProductCategory> productCategoryDynamoDbTable;
     
     public ProductCategoryRepository(DynamoDbEnhancedClient dynamoDbEnhancedClient) {
-        this.productCategoryDynamoDbTable = dynamoDbEnhancedClient.table("ProductCategory",
+        this.productCategoryDynamoDbTable = dynamoDbEnhancedClient.table("product_category",
                 TableSchema.fromBean(ProductCategory.class));
     }
     
