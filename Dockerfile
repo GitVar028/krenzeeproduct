@@ -1,18 +1,12 @@
-FROM public.ecr.aws/amazoncorretto/amazoncorretto:21
+# Use the official Lambda base image (includes the Runtime Interface Client)
+FROM public.ecr.aws/lambda/java:21
 
-ARG JAR_FILE=target/*.jar
-ARG PORT=8080
+# Lambda base image uses /var/task as the working directory by default
+WORKDIR /var/task
 
-WORKDIR /app
-
-COPY ${JAR_FILE} app.jar
-
-# Optional but safer
-RUN chown -R 1001 /app
-
-# Run as non-root user (no need to create one)
-USER 1001
-
-EXPOSE ${PORT}
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Copy your compiled code and dependencies from CodeBuild
+COPY target/classes/ ./
+COPY target/dependency/ ./lib/
+EXPOSE 8080
+# This now works because this image knows how to execute Java handlers
+CMD ["com.krayzee.krenzeeproduct.adapter.configuration.StreamLambdaHandler::handleRequest"]

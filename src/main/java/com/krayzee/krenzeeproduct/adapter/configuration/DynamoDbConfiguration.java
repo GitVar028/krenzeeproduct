@@ -13,17 +13,21 @@ import java.net.URI;
 @Configuration
 public class DynamoDbConfiguration {
     
-    @Value("${aws.dynamodb.endpoint:}")
+    @Value("${aws.dynamodb.endpoint:#{null}}")
     private String dynamoDbEndpoint;
     
     @Bean
     public DynamoDbClient dynamoDbClient() {
-        return DynamoDbClient.builder()
+        var builder = DynamoDbClient.builder()
                 .region(Region.AP_SOUTHEAST_1)
-                .endpointOverride(URI.create(dynamoDbEndpoint))
-                // this will take the AWS_ACCESS_KEY configured using aws configure
-                .credentialsProvider(DefaultCredentialsProvider.create()) 
-                .build();
+                .credentialsProvider(DefaultCredentialsProvider.create());
+
+        // Only override the endpoint if a valid URL is provided
+        if (!"NONE".equals(dynamoDbEndpoint) && !dynamoDbEndpoint.isBlank()) {
+            builder.endpointOverride(URI.create(dynamoDbEndpoint));
+        }
+        
+        return builder.build();
     }
     
     @Bean
@@ -32,6 +36,4 @@ public class DynamoDbConfiguration {
                 .dynamoDbClient(dynamoDbClient)
                 .build();
     }
-    
-    
 }

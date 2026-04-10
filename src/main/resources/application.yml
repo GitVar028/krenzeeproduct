@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: krenzeeproduct
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:prod} # Defaults to 'prod' in Lambda
+
+---
+# Local Development Profile
+spring:
+  config:
+    activate:
+      on-profile: local
+aws:
+  dynamodb:
+    endpoint: "http://localhost:8000"
+
+---
+# Production / Lambda Profile
+spring:
+  config:
+    activate:
+      on-profile: prod
+aws:
+  dynamodb:
+    # No endpoint here! The SDK will automatically find the real AWS service.
