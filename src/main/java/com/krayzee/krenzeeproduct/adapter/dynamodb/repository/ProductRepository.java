@@ -40,7 +40,7 @@ public class ProductRepository {
         if (lastSku != null && !lastSku.isEmpty()) {
             startKey = new HashMap<>();
             // For a composite key, DynamoDB requires both the PK and SK to resume a query
-            startKey.put("product_code", AttributeValue.builder().s(productFilterRequest.getProductCode()).build());
+            startKey.put("category_type_id", AttributeValue.builder().s(productFilterRequest.getCategoryTypeId()).build());
             startKey.put("sku", AttributeValue.builder().s(lastSku).build());
         }
         
@@ -65,11 +65,11 @@ public class ProductRepository {
         
         QueryEnhancedRequest request = QueryEnhancedRequest.builder()
                 .queryConditional(QueryConditional.keyEqualTo(
-                        Key.builder().partitionValue(productFilterRequest.getProductCode()).build()
+                        Key.builder().partitionValue(productFilterRequest.getCategoryTypeId()).build()
                 ))
                 .exclusiveStartKey(startKey)
                 .filterExpression(context.getFilterExpression())
-                .attributesToProject("product_code", "sku",
+                .attributesToProject("category_type_id", "sku",
                         "product_name", "product_image_url",
                         "purchase_model", "product_status",
                         "product_price_model")

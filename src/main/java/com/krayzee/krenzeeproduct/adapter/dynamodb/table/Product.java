@@ -14,7 +14,7 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSortK
 @Setter
 public class Product {
     
-    private String productCode;
+    private String categoryTypeId;
     
     private String sku;
     
@@ -34,9 +34,9 @@ public class Product {
     
     
     @DynamoDbPartitionKey
-    @DynamoDbAttribute("product_code")
-    public String getProductCode() {
-        return productCode;
+    @DynamoDbAttribute("category_type_id")
+    public String getCategoryTypeId() {
+        return categoryTypeId;
     }
     
     @DynamoDbSortKey

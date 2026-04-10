@@ -22,7 +22,7 @@ import java.util.List;
 public interface ProductMapper {
     
     
-    @Mapping(target = "productCode", source = "productCode")
+    @Mapping(target = "productCode", source = "categoryTypeId")
     @Mapping(target = "sku", source = "sku")
     @Mapping(target = "productName", source = "productName")
     @Mapping(target = "productImageUrl", source = "productImageUrl")

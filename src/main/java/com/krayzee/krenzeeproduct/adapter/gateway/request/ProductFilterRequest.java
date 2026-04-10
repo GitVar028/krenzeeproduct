@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class ProductFilterRequest { 
 
-    private String productCode; 
+    private String categoryTypeId; 
     
     private String lastSku; 
     

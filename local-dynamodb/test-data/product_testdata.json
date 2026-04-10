@@ -3,7 +3,7 @@
         {
             "PutRequest": {
                 "Item": {
-                    "product_code": { "S": "PROD-10293" },
+                    "category_type_id": { "S": "PROD-10293" },
                     "sku": { "S": "SKU-WEDINV01" },
                     "product_name": { "S": "A Modern Beautiful Wedding Invitation with Love" },
                     "product_image_url": { "S": "https://example.com/images/keyboard.png" },
@@ -23,13 +23,13 @@
                     },
                     "product_theme": {
                         "M": {
-                            "product_code": { "S": "PROD-10293" },
+                            "category_type_id": { "S": "PROD-10293" },
                             "themes": { "SS": ["Modern"] }
                         }
                     },
                     "product_type": {
                         "M": {
-                            "product_code": { "S": "PROD-10293" },
+                            "category_type_id": { "S": "PROD-10293" },
                             "product_type_name": { "S": "Invitations" },
                             "product_type_tags": { "SS": ["Envelope", "Acrylic"] }
                         }
@@ -40,7 +40,7 @@
         {
             "PutRequest": {
                 "Item": {
-                    "product_code": { "S": "PROD-10293" },
+                    "category_type_id": { "S": "PROD-10293" },
                     "sku": { "S": "SKU-WEDINV02" },
                     "product_name": { "S": "Romantic Loving Invitation" },
                     "product_image_url": { "S": "https://example.com/images/keyboard.png" },
@@ -60,13 +60,13 @@
                     },
                     "product_theme": {
                         "M": {
-                            "product_code": { "S": "PROD-10293" },
+                            "category_type_id": { "S": "PROD-10293" },
                             "themes": { "SS": ["Romantic"] }
                         }
                     },
                     "product_type": {
                         "M": {
-                            "product_code": { "S": "PROD-10293" },
+                            "category_type_id": { "S": "PROD-10293" },
                             "product_type_name": { "S": "Invitations" },
                             "product_type_tags": { "SS": ["Envelope", "Scroll"] }
                         }
@@ -77,7 +77,7 @@
         {
             "PutRequest": {
                 "Item": {
-                    "product_code": { "S": "PROD-10293" },
+                    "category_type_id": { "S": "PROD-10293" },
                     "sku": { "S": "SKU-WEDINV03" },
                     "product_name": { "S": "Rustic of Forest Invitation" },
                     "product_image_url": { "S": "https://example.com/images/keyboard.png" },
@@ -97,13 +97,13 @@
                     },
                     "product_theme": {
                         "M": {
-                            "product_code": { "S": "PROD-10293" },
+                            "category_type_id": { "S": "PROD-10293" },
                             "themes": { "SS": ["Rustic"] }
                         }
                     },
                     "product_type": {
                         "M": {
-                            "product_code": { "S": "PROD-10293" },
+                            "category_type_id": { "S": "PROD-10293" },
                             "product_type_name": { "S": "Invitations" },
                             "product_type_tags": { "SS": ["Envelope", "Acrylic"] }
                         }
