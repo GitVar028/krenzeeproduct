@@ -3,7 +3,7 @@
         {
             "PutRequest": {
                 "Item": {
-                    "category_type_id": { "S": "PROD-10293" },
+                    "category_type_id": { "S": "WEDDING-070501222024" },
                     "sku": { "S": "SKU-WEDINV01" },
                     "product_name": { "S": "A Modern Beautiful Wedding Invitation with Love" },
                     "product_image_url": { "S": "https://example.com/images/keyboard.png" },
@@ -23,13 +23,13 @@
                     },
                     "product_theme": {
                         "M": {
-                            "category_type_id": { "S": "PROD-10293" },
+                            "category_type_id": { "S": "WEDDING-070501222024" },
                             "themes": { "SS": ["Modern"] }
                         }
                     },
                     "product_type": {
                         "M": {
-                            "category_type_id": { "S": "PROD-10293" },
+                            "category_type_id": { "S": "WEDDING-070501222024" },
                             "product_type_name": { "S": "Invitations" },
                             "product_type_tags": { "SS": ["Envelope", "Acrylic"] }
                         }
@@ -40,7 +40,7 @@
         {
             "PutRequest": {
                 "Item": {
-                    "category_type_id": { "S": "PROD-10293" },
+                    "category_type_id": { "S": "WEDDING-070501222024" },
                     "sku": { "S": "SKU-WEDINV02" },
                     "product_name": { "S": "Romantic Loving Invitation" },
                     "product_image_url": { "S": "https://example.com/images/keyboard.png" },
@@ -60,13 +60,13 @@
                     },
                     "product_theme": {
                         "M": {
-                            "category_type_id": { "S": "PROD-10293" },
+                            "category_type_id": { "S": "WEDDING-070501222024" },
                             "themes": { "SS": ["Romantic"] }
                         }
                     },
                     "product_type": {
                         "M": {
-                            "category_type_id": { "S": "PROD-10293" },
+                            "category_type_id": { "S": "WEDDING-070501222024" },
                             "product_type_name": { "S": "Invitations" },
                             "product_type_tags": { "SS": ["Envelope", "Scroll"] }
                         }
@@ -77,7 +77,7 @@
         {
             "PutRequest": {
                 "Item": {
-                    "category_type_id": { "S": "PROD-10293" },
+                    "category_type_id": { "S": "WEDDING-070501222024" },
                     "sku": { "S": "SKU-WEDINV03" },
                     "product_name": { "S": "Rustic of Forest Invitation" },
                     "product_image_url": { "S": "https://example.com/images/keyboard.png" },
@@ -97,15 +97,120 @@
                     },
                     "product_theme": {
                         "M": {
-                            "category_type_id": { "S": "PROD-10293" },
+                            "category_type_id": { "S": "WEDDING-070501222024" },
                             "themes": { "SS": ["Rustic"] }
                         }
                     },
                     "product_type": {
                         "M": {
-                            "category_type_id": { "S": "PROD-10293" },
+                            "category_type_id": { "S": "WEDDING-070501222024" },
                             "product_type_name": { "S": "Invitations" },
                             "product_type_tags": { "SS": ["Envelope", "Acrylic"] }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "category_type_id": { "S": "BIRTHDAY-0705259592" },
+                    "sku": { "S": "SKU-BIRTHINV01" },
+                    "product_name": { "S": "Cars Birthday Invitation" },
+                    "product_image_url": { "S": "https://example.com/images/keyboard.png" },
+                    "purchase_model": { "S": "BULK" },
+                    "product_status": { "S": "IN_STOCK" },
+                    "product_price_model": {
+                        "M": {
+                            "sku": { "S": "SKU-BIRTHINV01" },
+                            "prices": {
+                                "M": {
+                                    "5_30": { "S": "129.99" },
+                                    "31PLUS": { "S": "115.50" },
+                                    "50PLUS": { "S": "99.00" }
+                                }
+                            }
+                        }
+                    },
+                    "product_theme": {
+                        "M": {
+                            "category_type_id": { "S": "BIRTHDAY-0705259592" },
+                            "themes": { "SS": ["Cars"] }
+                        }
+                    },
+                    "product_type": {
+                        "M": {
+                            "category_type_id": { "S": "BIRTHDAY-0705259592" },
+                            "product_type_name": { "S": "Invitations" },
+                            "product_type_tags": { "SS": ["Envelope", "Acrylic"] }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "category_type_id": { "S": "BIRTHDAY-0705259592" },
+                    "sku": { "S": "SKU-BIRTHINV02" },
+                    "product_name": { "S": "Forest Birthday Invitation" },
+                    "product_image_url": { "S": "https://example.com/images/keyboard.png" },
+                    "purchase_model": { "S": "BULK" },
+                    "product_status": { "S": "IN_STOCK" },
+                    "product_price_model": {
+                        "M": {
+                            "sku": { "S": "SKU-BIRTHINV02" },
+                            "prices": {
+                                "M": {
+                                    "5_30": { "S": "129.99" },
+                                    "31PLUS": { "S": "115.50" },
+                                    "50PLUS": { "S": "99.00" }
+                                }
+                            }
+                        }
+                    },
+                    "product_theme": {
+                        "M": {
+                            "category_type_id": { "S": "BIRTHDAY-0705259592" },
+                            "themes": { "SS": ["Forest"] }
+                        }
+                    },
+                    "product_type": {
+                        "M": {
+                            "category_type_id": { "S": "BIRTHDAY-0705259592" },
+                            "product_type_name": { "S": "Invitations" },
+                            "product_type_tags": { "SS": ["Envelope", "Acrylic"] }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "category_type_id": { "S": "KPOP-100001" },
+                    "sku": { "S": "SKU-KPOPSOUVMUG01" },
+                    "product_name": { "S": "K-Pop mugs souvenirs" },
+                    "product_image_url": { "S": "https://example.com/images/keyboard.png" },
+                    "purchase_model": { "S": "BULK" },
+                    "product_status": { "S": "IN_STOCK" },
+                    "product_price_model": {
+                        "M": {
+                            "sku": { "S": "SKU-KPOPSOUVMUG01" },
+                            "prices": {
+                                "M": {
+                                    "5_30": { "S": "129.99" },
+                                    "31PLUS": { "S": "115.50" },
+                                    "50PLUS": { "S": "99.00" }
+                                }
+                            }
+                        }
+                    },
+                    "product_type": {
+                        "M": {
+                            "category_type_id": { "S": "KPOP-100001" },
+                            "product_type_name": { "S": "Souvenirs" },
+                            "product_type_tags": { "SS": ["Mugs"] }
                         }
                     }
                 }
