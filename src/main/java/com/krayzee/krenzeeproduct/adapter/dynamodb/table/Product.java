@@ -28,7 +28,7 @@ public class Product {
     
     private ProductPriceModel productPriceModel;
     
-    private ProductTheme productTheme;
+    private ProductCategoryTheme productTheme;
     
     private ProductType productType;
     
@@ -71,7 +71,7 @@ public class Product {
     }
     
     @DynamoDbAttribute("product_theme")
-    public ProductTheme getProductTheme() {
+    public ProductCategoryTheme getProductTheme() {
         return productTheme;
     }
     

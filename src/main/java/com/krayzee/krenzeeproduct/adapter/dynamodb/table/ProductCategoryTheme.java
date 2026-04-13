@@ -13,17 +13,17 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
-public class ProductTheme {
+public class ProductCategoryTheme {
     
     
-    private String productCode;
+    private String categoryTypeId;
     
     private Set<String> themes;
     
     @DynamoDbPartitionKey
-    @DynamoDbAttribute("product_code")
-    public String getProductCode() {
-        return productCode;
+    @DynamoDbAttribute("category_type_id")
+    public String getCategoryTypeId() {
+        return categoryTypeId;
     }
     
     @DynamoDbAttribute("themes")

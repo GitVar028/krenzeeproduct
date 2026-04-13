@@ -3,7 +3,7 @@
         {
             "PutRequest": {
                 "Item": {
-                    "category_code": { "S": "PROD-10293" },
+                    "category_code": { "S": "WEDDING-070501222024" },
                     "category_name": { "S": "Weddings" },
                     "category_image_url": { "S": "image_url" },
                     "category_status": { "S": "ACTIVE" }
@@ -13,7 +13,7 @@
         {
             "PutRequest": {
                 "Item": {
-                    "category_code": { "S": "PROD-10294" },
+                    "category_code": { "S": "BIRTHDAY-0705259592" },
                     "category_name": { "S": "Birthdays" },
                     "category_image_url": { "S": "image_url" },
                     "category_status": { "S": "ACTIVE" }
@@ -23,7 +23,7 @@
         {
             "PutRequest": {
                 "Item": {
-                    "category_code": { "S": "PROD-10295" },
+                    "category_code": { "S": "KPOP-100001" },
                     "category_name": { "S": "K-Pop" },
                     "category_image_url": { "S": "image_url" },
                     "category_status": { "S": "ACTIVE" }

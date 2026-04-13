@@ -1,8 +1,6 @@
 package com.krayzee.krenzeeproduct.adapter.dynamodb.repository;
 
 import com.krayzee.krenzeeproduct.adapter.dynamodb.table.ProductCategory;
-import com.krayzee.krenzeeproduct.adapter.mapper.dto.ProductCategoryDTO;
-import com.krayzee.krenzeeproduct.adapter.mapper.ProductCategoryMapper;
 import org.springframework.stereotype.Repository;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;

@@ -13,7 +13,7 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbParti
 @Setter
 public class ProductCategory {
     
-    private String categoryCode;
+    private String categoryTypeId;
     
     private String categoryName;
     
@@ -22,9 +22,9 @@ public class ProductCategory {
     private String categoryStatus;
     
     @DynamoDbPartitionKey
-    @DynamoDbAttribute("category_code")
-    public String getCategoryCode() {
-        return categoryCode;
+    @DynamoDbAttribute("category_type_id")
+    public String getCategoryTypeId() {
+        return categoryTypeId;
     }
     
     @DynamoDbAttribute("category_name")

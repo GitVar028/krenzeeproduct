@@ -30,7 +30,7 @@ public class ProductDetails {
         return sku;
     }
     
-    @DynamoDbAttribute("sku")
+    @DynamoDbAttribute("description")
     public String getDescription() {
         return description;
     }

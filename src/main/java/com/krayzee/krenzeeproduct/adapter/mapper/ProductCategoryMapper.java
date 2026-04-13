@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ProductCategoryMapper {
 
-    @Mapping(target = "categoryCode", source = "categoryCode")
+    @Mapping(target = "categoryCode", source = "categoryTypeId")
     @Mapping(target = "categoryName", source = "categoryName")
     @Mapping(target = "categoryImageUrl", source = "categoryImageUrl")
     @Mapping(target = "categoryStatus", source = "categoryStatus")

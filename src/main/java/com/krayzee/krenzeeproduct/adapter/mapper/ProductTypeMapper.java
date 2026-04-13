@@ -5,11 +5,13 @@ import com.krayzee.krenzeeproduct.adapter.mapper.dto.ProductTypeDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 
-import java.util.Set;
+import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ProductTypeMapper { 
 
     ProductTypeDTO toDTO(ProductType productType);
+    
+    List<ProductTypeDTO> toDTOs(List<ProductType> productTypes);
     
 }

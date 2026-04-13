@@ -15,16 +15,16 @@ import java.util.Set;
 @Setter
 public class ProductType { 
 
-    private String productCode; 
+    private String categoryTypeId; 
     
     private String productTypeName; 
     
     private Set<String> productTypeTags;
     
     @DynamoDbPartitionKey
-    @DynamoDbAttribute("product_code")
-    public String getProductCode() {
-        return productCode;
+    @DynamoDbAttribute("category_type_id")
+    public String getCategoryTypeId() {
+        return categoryTypeId;
     }
     
     @DynamoDbAttribute("product_type_name")
