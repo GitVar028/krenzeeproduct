@@ -1,24 +1,19 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
+Description: SAM Template for a Java 21 application built as a Docker container
 
 Resources:
-  krenzee/krenzeeproduct:
+  MyJavaAppFunction:
     Type: AWS::Serverless::Function
     Properties:
+      # This is crucial: it tells SAM we are deploying a container, not a zip file
       PackageType: Image
-      # SAM will automatically update this URI during deployment
-      ImageUri: ""
-      # --- ADD THE TAGS HERE ---
-      Tags:
-        Version: DEV_VERSION
-      # -------------------------
-      Events:
-        ApiEvent:
-          Type: Api
-          Properties:
-            Path: /products
-            Method: post
+      Architectures:
+        - arm64
+      MemorySize: 1024
+      Timeout: 30
     Metadata:
-      DockerTag: latest
-      DockerContext: .
+      # This block instructs 'sam build' on how to build the Docker image
       Dockerfile: Dockerfile
+      DockerContext: .
+      DockerTag: java21-latest
