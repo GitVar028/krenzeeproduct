@@ -16,4 +16,4 @@ Resources:
       # This block instructs 'sam build' on how to build the Docker image
       Dockerfile: Dockerfile
       DockerContext: .
-      DockerTag: java21-latest
+      DockerTag: latest
