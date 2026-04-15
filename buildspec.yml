@@ -30,7 +30,7 @@ phases:
       - echo Packaging SAM application...
         # This pushes the image to ECR and creates 'packaged.yaml'
         # It uses the version tag we created for traceability
-      - sam package --output-template-file packaged.yaml --image-repository $REPOSITORY_URI --image-tag $VERSION
+      - sam package --output-template-file packaged.yaml --image-repository $IMAGE_REPO_NAME --image-tag $VERSION
       - echo Tagging Docker image...
       - docker tag $IMAGE_REPO_NAME:$VERSION $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:$VERSION
       - docker tag $IMAGE_REPO_NAME:$VERSION $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:latest
