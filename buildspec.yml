@@ -16,6 +16,8 @@ phases:
   build:
     commands:
       - echo Build started on `date`
+      - export VERSION="1.0.${CODEBUILD_BUILD_NUMBER}"
+      - echo "Version is set to $VERSION"
       - echo Building the Maven project...
       - mvn clean package dependency:copy-dependencies -DincludeScope=runtime -DskipTests
       - echo Building Docker image...
@@ -24,9 +26,10 @@ phases:
   post_build:
     commands:
       - echo Tagging Docker image...
-      - docker tag $IMAGE_REPO_NAME:$VERSION $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:$VERSION
+      - docker tag $IMAGE_REPO_NAME:$VERSION $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:latest
       - echo Pushing Docker image to ECR...
       - docker push $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:$VERSION
+      - docker push $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:latest
       - echo Build completed on `date`
 cache:
   paths:
