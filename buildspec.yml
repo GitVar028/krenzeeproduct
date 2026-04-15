@@ -39,7 +39,10 @@ phases:
     commands:
       - echo Packaging SAM application and pushing Docker image to ECR...
       # 3. sam package automatically pushes the built image to ECR and generates a new CloudFormation-ready template
-      - sam package --image-repository $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME --resolve-s3 --output-template-file packaged.yaml
+      - sam package \
+                --image-repository $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME \
+                --s3-bucket krenzee-artifact-bucket \
+                --output-template-file packaged.yaml
 
       - echo Build completed on `date`
 
