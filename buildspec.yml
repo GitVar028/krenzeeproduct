@@ -14,8 +14,10 @@ phases:
     commands:
       - echo "Packaging the SAM template..."
       # This command pushes the image to ECR and creates packaged.yaml
-      - sam package --image-repository $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME \
-                    --output-template-file packaged.yaml
+      - |
+        sam package \
+          --image-repository $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME \
+          --output-template-file $CODEBUILD_SRC_DIR/packaged.yaml
 artifacts:
   files:
     - packaged.yaml
