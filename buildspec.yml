@@ -8,6 +8,7 @@ phases:
       - echo Using Java 21
       - java -version
       - mvn -version
+      - sam --version
 
   pre_build:
     commands:
@@ -20,11 +21,16 @@ phases:
       - echo "Version is set to $VERSION"
       - echo Building the Maven project...
       - mvn clean package dependency:copy-dependencies -DincludeScope=runtime -DskipTests
-      - echo Building Docker image...
-      - docker build -t $IMAGE_REPO_NAME:$VERSION .
+      - echo Starting SAM build...
+      # SAM build uses your template.yaml and Dockerfile to create the image
+      - sam build --use-container
 
   post_build:
     commands:
+      - echo Packaging SAM application...
+        # This pushes the image to ECR and creates 'packaged.yaml'
+        # It uses the version tag we created for traceability
+      - sam package --output-template-file packaged.yaml --image-repository $REPOSITORY_URI --image-tag $VERSION
       - echo Tagging Docker image...
       - docker tag $IMAGE_REPO_NAME:$VERSION $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:$VERSION
       - docker tag $IMAGE_REPO_NAME:$VERSION $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:latest
@@ -32,6 +38,10 @@ phases:
       - docker push $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:$VERSION
       - docker push $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:latest
       - echo Build completed on `date`
+artifacts:
+  files:
+    - packaged.yaml
+    - template.yaml
 cache:
   paths:
     - '/root/.m2/**/*'

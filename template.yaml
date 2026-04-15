@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  MyProductFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      # SAM will automatically update this URI during deployment
+      ImageUri: !Sub "${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/krenzeeproduct:latest"
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /products
+            Method: post
+    Metadata:
+      # This tells SAM which Dockerfile to use during 'sam build'
+      DockerTag: latest
+      DockerContext: .
+      Dockerfile: Dockerfile
