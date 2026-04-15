@@ -14,35 +14,50 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 937506435390.dkr.ecr.ap-southeast-1.amazonaws.com
+      # Storing the ECR base URI as a variable for cleaner commands later
+      - export ECR_URI="937506435390.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME"
+
   build:
     commands:
       - echo Build started on `date`
       - export VERSION="1.0.${CODEBUILD_BUILD_NUMBER}"
       - echo "Version is set to $VERSION"
-      - echo Building the Maven project...
       - mvn clean package dependency:copy-dependencies -DincludeScope=runtime -DskipTests
-      - echo Starting SAM build...
-      # SAM build uses your template.yaml and Dockerfile to create the image
+      
+      # 1. Replace DEV_VERSION in BOTH Tags and Metadata blocks
       - sed -i "s/DEV_VERSION/$VERSION/g" template.yaml
+      
+      # 2. Build the image. 
+      # SAM builds a local docker image named: krenzeeproductfunction:$VERSION
       - sam build --use-container
 
   post_build:
     commands:
+      - echo Tagging Docker images...
+      # 3. Target the local SAM image and tag it for your ECR repo
+      - docker tag krenzeeproductfunction:$VERSION $ECR_URI:$VERSION
+      - docker tag krenzeeproductfunction:$VERSION $ECR_URI:latest
+      
+      - echo Pushing exact Docker tags to ECR...
+      # 4. Push manually to bypass SAM's hash string generator
+      - docker push $ECR_URI:$VERSION
+      - docker push $ECR_URI:latest
+      
+      # 5. Inject the absolute ECR URI into the compiled template so CloudFormation uses it
+      - sed -i "s|ImageUri:.*|ImageUri: \"$ECR_URI:$VERSION\"|g" .aws-sam/build/template.yaml
+
       - echo Packaging SAM application...
-        # This pushes the image to ECR and creates 'packaged.yaml'
-        # It uses the version tag we created for traceability
-      - sam package --output-template-file packaged.yaml --image-repository $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME
-      - echo Tagging Docker image...
-      - docker tag $IMAGE_REPO_NAME:$VERSION $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:$VERSION
-      - docker tag $IMAGE_REPO_NAME:$VERSION $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:latest
-      - echo Pushing Docker image to ECR...
-      - docker push $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:$VERSION
-      - docker push $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:latest
+      # 6. Package the application using the modified template. 
+      # We no longer need --image-repository because we already pushed the image.
+      - sam package --template-file .aws-sam/build/template.yaml --output-template-file packaged.yaml
+      
       - echo Build completed on `date`
+
 artifacts:
   files:
     - packaged.yaml
-    - template.yaml
+    # Optional: include the root template if you need it, but packaged.yaml is what you deploy
+    - template.yaml 
 cache:
   paths:
     - '/root/.m2/**/*'
