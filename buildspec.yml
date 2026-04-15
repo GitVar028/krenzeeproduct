@@ -15,7 +15,6 @@ phases:
       - aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 937506435390.dkr.ecr.ap-southeast-1.amazonaws.com
   build:
     commands:
-      - VERSION="1.0.${CODEBUILD_BUILD_NUMBER}"
       - echo Build started on `date`
       - echo Building the Maven project...
       - mvn clean package dependency:copy-dependencies -DincludeScope=runtime -DskipTests
@@ -25,7 +24,7 @@ phases:
   post_build:
     commands:
       - echo Tagging Docker image...
-      - docker tag $IMAGE_REPO_NAME:$VERSION $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - docker tag $IMAGE_REPO_NAME:$VERSION $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:$VERSION
       - echo Pushing Docker image to ECR...
       - docker push $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:$VERSION
       - echo Build completed on `date`
