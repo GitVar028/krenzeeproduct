@@ -16,14 +16,9 @@ phases:
       # This command pushes the image to ECR and creates packaged.yaml
       - sam package --image-repository $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME \
                     --output-template-file packaged.yaml
-      - echo "Current directory is $(pwd)"
-      - echo "Searching for packaged.yaml..."
-      - find . -name "packaged.yaml"
-      - ls -la packaged.yaml || echo "ERROR: File was NOT created!"
 artifacts:
   files:
     - packaged.yaml
-  discard-paths: yes
 cache:
   paths:
     - '/root/.m2/**/*'
