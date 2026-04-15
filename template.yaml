@@ -3,17 +3,20 @@ Transform: AWS::Serverless-2016-10-31
 Description: SAM Template for a Java 21 application built as a Docker container
 
 Resources:
-  krenzeeProductFunction:
+  KrenzeeProductFunction:
     Type: AWS::Serverless::Function
     Properties:
-      # This is crucial: it tells SAM we are deploying a container, not a zip file
       PackageType: Image
       Architectures:
         - arm64
+      # Required for CodeDeploy traffic shifting
+      AutoPublishAlias: live 
+      DeploymentPreference:
+        # Shifts 100% of traffic immediately
+        Type: AllAtOnce 
       MemorySize: 1024
       Timeout: 30
     Metadata:
-      # This block instructs 'sam build' on how to build the Docker image
       Dockerfile: Dockerfile
       DockerContext: .
       DockerTag: latest
