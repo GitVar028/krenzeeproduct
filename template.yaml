@@ -1,5 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
+
 Resources:
   krenzeeProductFunction:
     Type: AWS::Serverless::Function
@@ -7,6 +8,10 @@ Resources:
       PackageType: Image
       # SAM will automatically update this URI during deployment
       ImageUri: ""
+      # --- ADD THE TAGS HERE ---
+      Tags:
+        Version: DEV_VERSION
+      # -------------------------
       Events:
         ApiEvent:
           Type: Api
@@ -14,7 +19,6 @@ Resources:
             Path: /products
             Method: post
     Metadata:
-      # This tells SAM which Dockerfile to use during 'sam build'
       DockerTag: latest
       DockerContext: .
       Dockerfile: Dockerfile

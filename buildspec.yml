@@ -23,6 +23,7 @@ phases:
       - mvn clean package dependency:copy-dependencies -DincludeScope=runtime -DskipTests
       - echo Starting SAM build...
       # SAM build uses your template.yaml and Dockerfile to create the image
+      - sed -i "s/DEV_VERSION/$VERSION/g" template.yaml
       - sam build --use-container
 
   post_build:
