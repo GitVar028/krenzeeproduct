@@ -10,10 +10,9 @@ Resources:
       Architectures:
         - arm64
       # Required for CodeDeploy traffic shifting
-      AutoPublishAlias: live 
-      DeploymentPreference:
-        # Shifts 100% of traffic immediately
-        Type: AllAtOnce 
+#      AutoPublishAlias: live 
+#      DeploymentPreference:
+#        Type: AllAtOnce 
       MemorySize: 1024
       Timeout: 30
     Metadata:
