@@ -18,7 +18,6 @@ public class StreamLambdaHandler implements RequestStreamHandler {
     
     static {
         try {
-            // Use getHttpApiV2ProxyHandler instead of getAwsProxyHandler
             handler = SpringBootLambdaContainerHandler.getHttpApiV2ProxyHandler(KrenzeeproductApplication.class);
         } catch (ContainerInitializationException e) {
             throw new RuntimeException("Could not initialize Spring Boot application", e);
